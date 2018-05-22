@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="todoApp" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800">
+    <title>Todo List</title>
+</head>
+<body>
+    <!-- Sectiongoes here, with content for list -->
+   <section id="container" ng-controller="TodoController as list">
+       <div class="information">
+           <p class="header">TODO List</p>
+           <p>A place to store the things you have to do!</p>
+           <input ng-model="seacrh.task" type="text" placeholder="Filter Your Todos">
+           <div>
+               <ol>
+                   <li ng-class="{ 'completed': item.completed === true}"
+                        ng-repeat="iten in list.list | filter: search track by $index">
+                        <input 
+                            ng-if="!item.completed" ng-click="list.completeTask($index)" class="completeBtn" type="button" value="Complete">
+                            {{ item.task }}
+                            <i ng-click="list.removeTask($index)" class="material-icons">Clear</i>
+                   </li>
+               </ol>
+           </div>
+           <input type="text" placeholder="Add To List" ng-model="list.item.task">
+           <input ng-click="list.addTask()" id="addBtn" type="button" value="Add">
+       </div>
+   </section>
+   <!-- Script Links -->
+    <script src="https://code.angularjs.org/1.6.5/angular.min.js"></script>
+    <script src="module.js"></script>
+    <script src="controller.js"></script>
+</body>
+</html>
